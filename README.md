@@ -33,7 +33,7 @@ chmod +x PHPterm_1.1
 <p>2. Execute the program</p>
 
 ```
-./PHPterm_1.1
+./PHPterm_1.1_Linux64
 ```
 
   
