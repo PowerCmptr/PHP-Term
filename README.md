@@ -6,9 +6,9 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://github.com/PowerCmptr/PHP-Term/blob/main/screenshots/ss1.png?raw=true" alt="project-screenshot" width="400" height="400/">
+<img src="https://github.com/PowerCmptr/PHP-Term/blob/main/screenshots/ss1.png?raw=true" alt="project-screenshot" width="1115" height="625/">
 
-<img src="https://github.com/PowerCmptr/PHP-Term/blob/main/screenshots/ss2.png?raw=true" alt="project-screenshot" width="400" height="400/">
+<img src="https://github.com/PowerCmptr/PHP-Term/blob/main/screenshots/ss2.png?raw=true" alt="project-screenshot" width="1115" height="625/">
 
   
   
